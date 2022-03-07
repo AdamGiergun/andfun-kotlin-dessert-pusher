@@ -138,10 +138,11 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
      * Menu methods
      */
     private fun onShare() {
-        val shareIntent = ShareCompat.IntentBuilder.from(this)
-                .setText(getString(R.string.share_text, dessertsSold, revenue))
-                .setType("text/plain")
-                .intent
+        val shareIntent = ShareCompat.IntentBuilder(this).run {
+            setText(getString(R.string.share_text, dessertsSold, revenue))
+            setType("text/plain")
+            intent
+        }
         try {
             startActivity(shareIntent)
         } catch (ex: ActivityNotFoundException) {
